@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{amsmath,amsfonts,amssymb}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\DeclareMathOperator*{\argmax}{arg\,max}
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Quantitative Developer - Technical Assignment}
+\author{Roberts Oskars Vitins}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\maketitle
+
+\section{Combinatorics}
+
+Each glass can hold 0 to 10 pens, as is not stated otherwise. The question is in how many ways can you assign 5 glasses to 10 pens. 1 pen can be assigned to 5 glasses, and pen assignments are independent, as glasses do not have a maximum capacity. Thus,
+\[
+\text{total combinations} = 5^{10} = 9,765,625
+\]
+
+\section{Calculus}
+The idea is that we can always find a function that satisfies the given conditions and which can get arbitrarily close to 5. That is, we know that $f(x)\ge0$, $f'(x)>0$ $\forall x\in\mathbb{R}$ and $f(2) =5$, thus we can see that this function is always increasing and non-negative, hence the upper bound for the function evaluated at $0$ is $f(0)<5$. To show that we can get arbitrarily close, we may consider the following example. We are looking for a function that is $f(2)=5$, always increasing and positive. One such example is
+$$
+f(x)=5\times 10^{(x-2)}
+$$
+this function is equal to $f(0)=\frac{5}{100}$. However, by changing the exponent, we increase the value of the function evaluated at 0. Consider the following:
+$$
+f_k(x)=5\times10^{\frac{1}{k}(x-2)},\quad \text{where } k=1,2,3,...
+$$
+we can see that:
+$$
+f_1(0)=\frac{5}{100}=0.05,\quad f_2(0)=\frac{5}{10}=0.5,\quad f_3(0)=1.077..., \quad f_4(0)=1.581...
+$$
+and so on. In fact, if we take the limit, we get:
+$$
+\lim_{k\rightarrow \infty}f_k(0) = 5\lim_{k\rightarrow \infty} 10^{\frac{1}{k}(0-2)} = 5, \quad \text{since } \lim_{k\rightarrow \infty}\frac{1}{k}(0-2) = \lim_{k\rightarrow \infty}\frac{-2}{k} = 0
+$$
+Therefore, we conclude that there will always be a function that satisfies these conditions and has $f(0)$ arbitrarily close to 5. Hence, the supremum is 5. (However, technically the maximum value that a particular function could take is not 5, since such a function would fail the condition that $f'(x)>0\quad \forall x$, since it would have to be constant on $x\in[0,2]$).
+
+
+
+\section{Linear Algebra}
+
+The given matrix is:
+\[
+A = \begin{bmatrix}
+3 & 2 & 3 \\
+0 & 2 & 1 \\
+0 & 0 & 1
+\end{bmatrix}
+\]
+The matrix \(A\) is given in its row echelon form, and we can see that all of its pivots are not zero. Therefore, all three rows / columns are linearly independent, which means that the rank of the matrix \(A\) is \(\mathrm{rank}(A) = 3\).
+
+\section{Stochastic Calculus}
+
+\(X\) is a Geometric Brownian Motion with constant drift and diffusion coefficients. The differential of \(X\) is:
+
+\begin{equation}
+    \text{d}X(t) = \mu(t)\,X(t)\,\text{d}t\,+ \sigma(t)\,X(t)\,\text{d}W(t)
+\end{equation}
+
+where \(\mu(t) = \mu\) and \(\sigma(t) = \sigma.\)
+
+To find the differential of \(X^{2}\) we apply Ito's calculus by setting \( f(t,x) = x^{2}\). Then, according to Ito's Lemma: 
+\[
+\text{d}f(t,x) = f_{t} \, \text{d}t\, + f_{x}\, \text{d}X(t)\, + \tfrac{1}{2} f_{xx}\,\text{d}X(t)\,\text{d}X(t)
+\]
+
+In our case \(f_{t}(t,X(t)) = 0\), \(f_{x}(t,X(t)) = 2X(t)\), and \(f_{xx}(t,X(t)) = 2\). Substituting these values into the equation above, we can find the differential for \(X^{2}\):
+
+\begin{align}
+\text{d}X^{2}(t) &= 2X^{2}(t)\left[ \mu\,\text{d}t + \sigma\,\text{d}W(t) \right] + \sigma^{2}X^{2}(t)\,\text{d}t \nonumber \\
+&= 2X^{2}(t)\left[ \left( \mu + \tfrac{1}{2}\sigma^{2} \right)\text{d}t + \sigma\,\text{d}W(t) \right]
+\end{align}
+
+\section{Portfolio Allocation}
+We are given two equities \(X\) and \(Y\), with returns \(r_{x}\) and \(r_{y}\), respectively. Additionally, we are given the following: 
+
+\begin{align}
+1)\quad & \mathbb{E}[r_x] = \mu_x \\
+2)\quad & \mathbb{E}[r_y] = \mu_y \\
+3)\quad & \mathrm{Var}(r_x) = \sigma_x \\
+4)\quad & \mathrm{Var}(r_y) = \sigma_y \\
+5)\quad & \frac{\mathrm{Cov}(r_x, r_y)}{\sqrt{\mathrm{Var}(r_x)\,\mathrm{Var}(r_y)}} = \rho
+\end{align}
+
+Using (5), (6), and (7) we can construct a covariance matrix for the equities \(X\) and \(Y\):
+
+\[
+\Sigma = 
+\begin{bmatrix}
+\sigma_x & \rho \sqrt{\sigma_x \sigma_y} \\
+\rho \sqrt{\sigma_x \sigma_y} & \sigma_y
+\end{bmatrix}
+\]
+
+We can also define a vector of quantities held in each of the equities. I define it as follows:
+
+\[
+q = 
+\begin{bmatrix}
+q_x \\
+q_y
+\end{bmatrix}
+\]
+
+Then the variance of the portfolio return \(\mathrm{Var}(r_p)\) is:
+\[
+\mathrm{Var}(r_p) = q^{\mathrm{T}} \Sigma q 
+= q_x^{2}\sigma_x + q_y^{2}\sigma_y + 2\rho \sqrt{\sigma_x \sigma_y} \, q_x q_y
+\]
+
+We can minimize \(\mathrm{Var}(r_p)\) w.r.t. \(q_y\) by solving the following: 
+
+\[
+\frac{\text{d}\,\mathrm{Var}(r_p)}{\text{d}\,q_y} = 0
+\]
+
+\[
+\frac{\text{d}\,\mathrm{Var}(r_p)}{\text{d}\,q_y}
+= 2q_y\sigma_y + 2\rho\sqrt{\sigma_x\sigma_y}\,q_x = 0
+\]
+
+After rearranging, we find the solution:
+\[
+q_y = -\frac{2\rho\sqrt{\sigma_x\sigma_y}\,q_x}{2\sigma_y}
+= -\rho\sqrt{\frac{\sigma_x}{\sigma_y}}\,q_x
+\]
+
+\end{document}
