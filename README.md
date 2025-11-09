@@ -37,7 +37,7 @@ Which matched the simple solution.
 ## Question 3: Pricing an American Option
 The purpose of this problem is to calculate the implied volatility of an American option with given parameters. An additional twist is that we have to fit the given term structure of zero rates. I assume that these are continuous rates.
 
-The implied volatility of an option is the volatility that, together with other parameters that can be directly observed in the market, yields the current price of the option. To calculate the implied volatility, we first need a pricing formula. For this task, I implemented a binomial tree, as that allows us to select appropriate stopping times. Then, to fit the term structure I first interpolate the zero rate curve and then calculate the forward rate for the relevant interval in the binomial tree. This allowed me to calculated fitted binomial tree.
+The implied volatility of an option is the volatility that, together with other parameters that can be directly observed in the market, yields the current price of the option. To calculate the implied volatility, we first need a pricing formula. For this task, I implemented a binomial tree, as that allows us to select appropriate stopping times. Then, to fit the binomial tree to the term structure I first interpolate the zero rate curve and then calculate the forward rate for the relevant interval in the binomial tree.
 
 Then using an optimization algorithm, I calculated the implied volatility for a call and a put option. These are:
 1) Implied vol Call = 19.68%
